@@ -7,25 +7,29 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-        //Declaração de variavel
-        $verao  = "12-23";
-        $outono = "03-20";
-        $inverno = "06-21";
-        $primavera = "09-23";
+<?php
+function getSeason($month, $day) {
+    if (($month == 3 && $day >= 20) || ($month > 3 && $month < 6) || ($month == 6 && $day < 21)) {
+        return 'Primavera';
+    } elseif (($month == 6 && $day >= 21) || ($month > 6 && $month < 9) || ($month == 9 && $day < 23)) {
+        return 'Verão';
+    } elseif (($month == 9 && $day >= 23) || ($month > 9 && $month < 12) || ($month == 12 && $day < 21)) {
+        return 'Outono';
+    } else {
+        return 'Inverno';
+    }
+}
 
-        $data_atual = date("m-d");
+// Obtém a data atual
+$currentDate = new DateTime();
+$month = $currentDate->format('n');
+$day = $currentDate->format('j');
 
-        if($outono < $data_atual && $data_atual <= $inverno)
-                echo "outono";
-        else if($inverno < $data_atual && $data_atual <= $primavera)
-                echo "inverno";
-        else if($primavera < $data_atual && $data_atual <= $verao)
-                echo "primavera";
-        else
-                echo "verao";      
-    
-         
-    ?>
+// Determina a estação do ano
+$season = getSeason($month, $day);
+
+// Exibe a estação do ano
+echo 'Estamos na estação: ' . $season;
+?>
 </body>
 </html>
